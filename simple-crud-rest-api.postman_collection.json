@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "77f0b56d-bb05-4956-91fe-3e3b20aa144e",
+		"name": "simple-crud-rest-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "find-all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/employee/find",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"employee",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/employee/find/by-id?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"employee",
+						"find",
+						"by-id"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:8082/employee/delete/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"employee",
+						"delete",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n     \"employeeId\": 1,\n    \"employeeName\": \"ahasan habib\",\n    \"employeeGender\": \"female\",\n    \"employeePhone\": \"2222\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/employee/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"employee",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \n    \"employeeName\":\"ahasan habib\",\n\n    \"employeeGender\":\"female\",\n\n\t\"employeePhone\":\"11111\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/employee/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"employee",
+						"add"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
