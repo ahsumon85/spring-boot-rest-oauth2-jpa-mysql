@@ -13,7 +13,7 @@
 	</parent>
 
 	<groupId>com.rest</groupId>
-	<artifactId>spring-boot-rest</artifactId>
+	<artifactId>spring-boot-secure-rest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>spring-boot-rest-curd</name>
