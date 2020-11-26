@@ -12,7 +12,7 @@ import java.util.List;
 */
 
 @Entity
-@Table(name = "user", schema = "public")
+@Table(name = "user")
 
 public class User implements Serializable {
    
