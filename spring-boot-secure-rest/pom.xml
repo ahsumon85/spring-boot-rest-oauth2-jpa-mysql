@@ -11,7 +11,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.rest</groupId>
+	<groupId>com.ahasan</groupId>
 	<artifactId>spring-boot-secure-rest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
