@@ -56,7 +56,6 @@ public class EmployeeService {
 			throw new RecordNotFoundException(CustomMessage.NO_RECOURD_FOUND + employeeId);
 		}
 		return new BaseResponse(Topic.EMPLOYEE.getName() + CustomMessage.DELETE_SUCCESS_MESSAGE);
-		
 	}
 
 	private EmployeeDTO copyEmployeeEntityToDto(EmployeeEntity employeeEntity) {

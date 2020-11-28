@@ -8,9 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
-import com.ahasan.rest.common.utils.Unique;
 
 @Entity
 @Table(name = "employee")

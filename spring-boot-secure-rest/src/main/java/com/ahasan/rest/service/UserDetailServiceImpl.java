@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.ahasan.rest.entity.AuthUserDetail;
 import com.ahasan.rest.entity.User;
 import com.ahasan.rest.repo.UserDetailRepository;
 

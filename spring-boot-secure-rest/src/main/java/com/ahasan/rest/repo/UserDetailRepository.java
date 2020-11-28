@@ -19,7 +19,4 @@ public interface UserDetailRepository extends JpaRepository<User,Integer> {
 
 	boolean existsByUsername(String name);
 
-
-
-
 }

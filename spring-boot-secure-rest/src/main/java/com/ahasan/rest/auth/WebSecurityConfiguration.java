@@ -25,15 +25,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
     
-	@Override 
-	protected void configure(HttpSecurity http) throws Exception {
-
-		  http.csrf().disable();
-//		  .sessionManagement().disable()
-//		  .authorizeRequests().antMatchers("/auth-api/user/info").permitAll(); 
-
-	 }
-	
 
     @Bean
     protected AuthenticationManager getAuthenticationManager() throws Exception {
@@ -48,6 +39,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 }
