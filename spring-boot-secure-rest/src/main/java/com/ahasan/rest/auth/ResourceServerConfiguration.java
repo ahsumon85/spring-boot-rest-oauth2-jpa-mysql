@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-    private static final String RESOURCE_ID = "ati-product-rs";
+    private static final String RESOURCE_ID = "microservice";
     private static final String SECURED_READ_SCOPE = "#oauth2.hasScope('READ')";
     private static final String SECURED_WRITE_SCOPE = "#oauth2.hasScope('WRITE')";
     private static final String SECURED_PATTERN = "/**";
@@ -26,7 +26,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         http.csrf().disable()
                 .sessionManagement().disable()
                 .authorizeRequests()
-                .antMatchers("/medicine/category/list").permitAll().and()
+                .antMatchers("/employee/list").permitAll().and()
                 .requestMatchers()                
                 .antMatchers(SECURED_PATTERN).and().authorizeRequests()
                 .antMatchers(HttpMethod.POST, SECURED_PATTERN)
