@@ -22,11 +22,10 @@ import javax.sql.DataSource;
 
 
 /**
-*
-* @author Ahasan Habib
-* @since 03 06 20
-*/
-
+ *
+ * @author Ahasan Habib
+ * @since 03 06 20
+ */
 
 @EnableAuthorizationServer
 @Configuration

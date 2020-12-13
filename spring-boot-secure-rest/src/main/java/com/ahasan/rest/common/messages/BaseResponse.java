@@ -5,6 +5,12 @@
  */
 package com.ahasan.rest.common.messages;
 
+/**
+ *
+ * @author Ahasan Habib
+ * @since 03 06 20
+ */
+
 public class BaseResponse {
 
 	private String message;

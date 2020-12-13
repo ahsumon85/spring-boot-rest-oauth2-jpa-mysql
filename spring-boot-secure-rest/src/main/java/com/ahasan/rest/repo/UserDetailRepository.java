@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ahasan.rest.entity.User;
 
-
 /**
 *
 * @author Ahasan Habib

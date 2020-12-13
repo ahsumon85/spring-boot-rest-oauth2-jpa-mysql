@@ -16,7 +16,6 @@ import java.util.List;
 * @since 03 06 20
 */
 
-
 public class AuthUserDetail extends User implements UserDetails {
 
 	private static final long serialVersionUID = -7568522007172192358L;

@@ -8,6 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+/**
+ *
+ * @author Ahasan Habib
+ * @since 03 06 20
+ */
 
 @Entity
 @Table(name = "employee")
@@ -61,6 +66,5 @@ public class EmployeeEntity {
 	public void setEmployeePhone(String employeePhone) {
 		this.employeePhone = employeePhone;
 	}
-
 
 }
