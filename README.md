@@ -22,6 +22,51 @@ In this Spring security oauth2 tutorial, learn to build an authorization server 
 - `Access Token`: Sent with each request, usually valid for about an hour only.
 - `Refresh Token`: It is used to get a 00new access token, not sent with each request, usually lives longer than access token.
 
+### Quick Start a Cloud Security App
+
+Let's start by configuring spring cloud oauth2 in a Spring Boot application for microservice security.
+
+First, we need to add the `spring-cloud-starter-oauth2` dependency:
+
+```
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-oauth2</artifactId>
+    <version>2.2.2.RELEASE</version>
+</dependency>
+```
+
+This will also bring in the `spring-cloud-starter-security`dependency.
+
+```
+<dependency>
+     <groupId>org.springframework.cloud</groupId>
+     <artifactId>spring-cloud-starter-security</artifactId>
+</dependency>
+```
+
+And we need to add spring cloud `dependency `  in`dependencyManagement` 
+
+```
+<dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-dependencies</artifactId>
+			<version>${spring-cloud.version}</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+	</dependencies>
+</dependencyManagement>
+```
+
+Another think is now we will add spring cloud version:
+
+`<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>`
+
+
+
 ##  spring-boot-rest-data-jpa project run
 
 1. `git clone https://github.com/ahasanhabibsumon/spring-boot-rest-data-jpa.git`
