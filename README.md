@@ -1,4 +1,4 @@
-# Secure RESTful Web Service using spring-boot, spring-cloud-oauth2, JPA, MySQL and Hibernate Validator
+## Secure RESTful Web Service using spring-boot, spring-cloud-oauth2, JPA, MySQL and Hibernate Validator
 This guide will help you create a CRUD REST API/Service with Spring Boot, JPA and Hibernate. We will create a JPA Repository for a employee Entity and expose it using a employee Resource.
 
 
