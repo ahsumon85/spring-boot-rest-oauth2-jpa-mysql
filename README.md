@@ -192,7 +192,7 @@ INSERT INTO ROLE_USER (ROLE_ID, USER_ID)
     (3, 3); /* user-operatorr */ ;
 ```
 
-### Configure OAuth2 Server
+### Configure Authorization Server
 
 Annotate the `Oauth2AuthorizationServerApplication.java` with `@EnableAuthorizationServer`. This enables the Spring to consider this service as authorization Server.
 
@@ -225,7 +225,8 @@ public class AuthorizationServerConfiguration implements AuthorizationServerConf
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.checkTokenAccess("isAuthenticated()").tokenKeyAccess("permitAll()");
+    security.checkTokenAccess("isAuthenticated()").tokenKeyAccess("isAuthenticated()");
+
     }
 
     @Override
@@ -238,6 +239,20 @@ public class AuthorizationServerConfiguration implements AuthorizationServerConf
         endpoints.tokenStore(jdbcTokenStore());
         endpoints.authenticationManager(authenticationManager);
     }
+    
+    @Bean
+    public FilterRegistrationBean<CorsFilter> corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        source.registerCorsConfiguration("/**", config);
+        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<CorsFilter>(new CorsFilter(source));
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return bean;
+    }
 }
 ```
 
@@ -247,26 +262,28 @@ public class AuthorizationServerConfiguration implements AuthorizationServerConf
 
 ```
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+	@Autowired
+	private UserDetailsService userDetailsService;
 
-    @Bean
-    protected AuthenticationManager getAuthenticationManager() throws Exception {
-        return super.authenticationManagerBean();
-    }
+	@Bean
+	protected AuthenticationManager getAuthenticationManager() throws Exception {
+		return super.authenticationManagerBean();
+	}
 
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+	}
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+	}
 }
+
 ```
 
 ### Test Authorization Service
@@ -302,6 +319,8 @@ Now, add the Request Parameters as follows −
   "scope":"read write"
 }
 ```
+
+### Configure Authorization Server
 
 ##  spring-boot-rest-data-jpa project run
 
