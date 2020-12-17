@@ -269,6 +269,40 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 }
 ```
 
+### Test Authorization Service
+
+***Get Access Token***
+
+Let’s get the access token for `admin` by passing his credentials as part of header along with authorization details of appclient by sending `client_id` `client_pass` `username` `userpsssword`
+
+Now hit the POST method URL via POSTMAN to get the OAUTH2 token.
+
+***http://localhost:8080/oauth/token***
+
+Now, add the Request Headers as follows −
+
+*`Authorization` − Basic Auth with your Client Id and Client secret.
+
+*`Content Type` − application/x-www-form-urlencoded [![1](https://user-images.githubusercontent.com/31319842/95816138-2e40d180-0d40-11eb-99c7-403cdf7ef070.png)](https://user-images.githubusercontent.com/31319842/95816138-2e40d180-0d40-11eb-99c7-403cdf7ef070.png)
+
+Now, add the Request Parameters as follows −
+
+- `grant_type` = password
+- `username` = your username
+- `password` = your password [![2](https://user-images.githubusercontent.com/31319842/95816163-3bf65700-0d40-11eb-9c87-7b721e0a268f.png)](https://user-images.githubusercontent.com/31319842/95816163-3bf65700-0d40-11eb-9c87-7b721e0a268f.png)
+
+**HTTP POST Response**
+
+```
+{ 
+  "access_token":"000ff762-414c-4605-858a-0ed7bee6f68e",
+  "token_type":"bearer",
+  "refresh_token":"79aabc70-f310-4c49-bf7e-516208b3bef4",
+  "expires_in":999999,
+  "scope":"read write"
+}
+```
+
 ##  spring-boot-rest-data-jpa project run
 
 1. `git clone https://github.com/ahasanhabibsumon/spring-boot-rest-data-jpa.git`
