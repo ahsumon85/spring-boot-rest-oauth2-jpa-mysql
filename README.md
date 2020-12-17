@@ -65,7 +65,7 @@ Another think is now we will add spring cloud version into the `properties` tag:
 
 ````
 <properties>
-		<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+  <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
 </properties>
 ````
 
@@ -192,7 +192,82 @@ INSERT INTO ROLE_USER (ROLE_ID, USER_ID)
     (3, 3); /* user-operatorr */ ;
 ```
 
+### Configure OAuth2 Server
 
+Annotate the `Oauth2AuthorizationServerApplication.java` with `@EnableAuthorizationServer`. This enables the Spring to consider this service as authorization Server.
+
+Let’s create a class `AuthorizationServerConfiguration.java` with below details.
+
+- **JdbcTokenStore** implements token services that stores tokens in a database.
+- **BCryptPasswordEncoder** implements PasswordEncoder that uses the BCrypt strong hashing function. Clients can optionally supply a “strength” (a.k.a. log rounds in BCrypt) and a SecureRandom instance. The larger the strength parameter the more work will have to be done (exponentially) to hash the passwords. The value used in this example is 8 for client secret.
+- **AuthorizationServerEndpointsConfigurer** configures the non-security features of the Authorization Server endpoints, like token store, token customizations, user approvals and grant types.
+- **AuthorizationServerSecurityConfigurer** configures the security of the Authorization Server, which means in practical terms the /oauth/token endpoint.
+- **ClientDetailsServiceConfigurer** configures the ClientDetailsService, e.g. declaring individual clients and their properties.
+
+```
+@EnableAuthorizationServer
+@Configuration
+public class AuthorizationServerConfiguration implements AuthorizationServerConfigurer {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private DataSource dataSource;
+    
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Bean
+    TokenStore jdbcTokenStore() {
+        return new JdbcTokenStore(dataSource);
+    }
+
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        security.checkTokenAccess("isAuthenticated()").tokenKeyAccess("permitAll()");
+    }
+
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.jdbc(dataSource).passwordEncoder(passwordEncoder);
+    }
+
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints.tokenStore(jdbcTokenStore());
+        endpoints.authenticationManager(authenticationManager);
+    }
+}
+```
+
+**Configure User Security Authentication** Let’s create a class `UserSecurityConfig.java` to handle user authentication.
+
+- **PasswordEncoder** implements PasswordEncoder that uses the BCrypt strong hashing function. Clients can optionally supply a “strength” (a.k.a. log rounds in BCrypt) and a SecureRandom instance. The larger the strength parameter the more work will have to be done (exponentially) to hash the passwords. The value used in this example is 4 for user’s password.
+
+```
+@Configuration
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Bean
+    protected AuthenticationManager getAuthenticationManager() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+}
+```
 
 ##  spring-boot-rest-data-jpa project run
 
