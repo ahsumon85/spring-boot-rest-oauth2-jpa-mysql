@@ -387,12 +387,12 @@ Server Running on: `8082` port
 curl --request GET 'localhost:8082/employee/find' --header 'Authorization: Bearer 8b22d6b0-bd2c-44b3-9934-d20268ebe886'
 ```
 
-![Screenshot from 2020-12-07 09-11-07](https://user-images.githubusercontent.com/31319842/101305239-6bbb6a00-386c-11eb-8252-9bfd4d9d092d.png)
+![Screenshot from 2020-12-07 09-19-06](https://user-images.githubusercontent.com/31319842/101305656-5bf05580-386d-11eb-8fc3-95a8c18f0b05.png)
 
 - Here `[localhost:8082/employee/find]` on the `http` means protocol, `localhost` for hostaddress 8082 are service port and `/employee/find` is method URL.
 - Here `[Authorization: Bearer 62e2545c-d865-4206-9e23-f64a34309787']` `Bearer` is toiken type and `62e2545c-d865-4206-9e23-f64a34309787` is auth service provided token
 
 ### For getting All API Information
 
-On this repository we will see `secure-microservice-architecture.postman_collection.json` file, this file have to `import` on postman then we will ses all API information for testing api.
+On this repository we will see `spring-boot-secure-rest.postman_collection.json` file, this file have to `import` on postman then we will ses all API information for testing api.
 
