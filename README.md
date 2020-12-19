@@ -381,11 +381,15 @@ java –jar <JARFILE> `Run on sts IDE `click right button on the project >Run As
 
 Server Running on: `8082` port
 
-**Test HTTP GET Request to resource service**
+**Test HTTP GET Request to resource service using CURL**
 
 ```
 curl --request GET 'localhost:8082/employee/find' --header 'Authorization: Bearer 8b22d6b0-bd2c-44b3-9934-d20268ebe886'
 ```
+
+
+
+**GET API test by postman**
 
 ![Screenshot from 2020-12-07 09-19-06](https://user-images.githubusercontent.com/31319842/101305656-5bf05580-386d-11eb-8fc3-95a8c18f0b05.png)
 
