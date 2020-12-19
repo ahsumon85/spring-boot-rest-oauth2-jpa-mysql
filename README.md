@@ -138,7 +138,7 @@ create table if not exists role_user (
 - `oauth_client_details table` is used to store client details.
 - `oauth_access_token` and `oauth_refresh_token` is used internally by OAuth2 server to store the user tokens.
 
-***Create a client***
+**Create a client**
 
 Let’s insert a record in `oauth_client_details` table for a client named appclient with a password `appclient`.
 
@@ -149,8 +149,7 @@ I have used `CodeachesBCryptPasswordEncoder.java` available [here](https://githu
 `src/main/resources/data.sql`
 
 ```
-INSERT INTO oauth_client_details (client_id, client_secret, web_server_redirect_uri, scope, access_token_validity, refresh_token_validity, resource_ids, authorized_grant_types, additional_information) 
-VALUES ('mobile', '{bcrypt}$2a$10$gPhlXZfms0EpNHX0.HHptOhoFD1AoxSr/yUIdTqA8vtjeP4zi0DDu', 'http://localhost:8080/code', 'READ,WRITE', '3600', '10000', 'inventory,payment', 'authorization_code,password,refresh_token,implicit', '{}');
+INSERT INTO oauth_client_details (client_id, client_secret, web_server_redirect_uri, scope, access_token_validity, refresh_token_validity, resource_ids, authorized_grant_types, additional_information) VALUES ('mobile', '{bcrypt}$2a$10$gPhlXZfms0EpNHX0.HHptOhoFD1AoxSr/yUIdTqA8vtjeP4zi0DDu', 'http://localhost:8080/code', 'READ,WRITE', '3600', '10000', 'microservice', 'authorization_code,password,refresh_token,implicit', '{}');
 
 /*client_id - client_secret*/
 /* mobile - pin* /
@@ -320,7 +319,48 @@ Now, add the Request Parameters as follows −
 }
 ```
 
-### Configure Authorization Server
+
+
+### Configure Resource Server
+
+The **resource server** is the OAuth 2.0 term for your API **server**. The **resource server** handles authenticated requests after the application has obtained an access token. ... Each of these **resource servers** are distinctly separate, but they all share the same authorization **server**.
+
+#### Enable oauth2 on sales service
+
+Now add the `@EnableResourceServer` and `@Configuration` annotation on Spring boot application class present in src folder. With this annotation, this artifact will act like a resource service. With this `@EnableResourceServer` annotation, this artifact will act like a resource service.
+
+```
+@Configuration
+@EnableResourceServer
+public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
+
+	private static final String RESOURCE_ID = "microservice";
+	private static final String SECURED_READ_SCOPE = "#oauth2.hasScope('READ')";
+	private static final String SECURED_WRITE_SCOPE = "#oauth2.hasScope('WRITE')";
+	private static final String SECURED_PATTERN = "/**";
+
+	@Override
+	public void configure(ResourceServerSecurityConfigurer resources) {
+		resources.resourceId(RESOURCE_ID);
+	}
+
+	@Override
+	public void configure(HttpSecurity http) throws Exception {
+			http.csrf().disable()
+				.sessionManagement().disable()
+				.authorizeRequests()
+				.antMatchers("/employee/list").permitAll()
+				.and()
+				.requestMatchers().antMatchers(SECURED_PATTERN)
+				.and()
+				.authorizeRequests().antMatchers(HttpMethod.POST, SECURED_PATTERN)
+				.access(SECURED_WRITE_SCOPE).anyRequest()
+				.access(SECURED_READ_SCOPE);
+	}
+}
+```
+
+
 
 ##  spring-boot-rest-data-jpa project run
 
