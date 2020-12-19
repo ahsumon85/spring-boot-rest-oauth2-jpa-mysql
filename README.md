@@ -294,7 +294,7 @@ Let’s get the access token for `admin` by passing his credentials as part of h
 
 Now hit the POST method URL via POSTMAN to get the OAUTH2 token.
 
-***http://localhost:8080/oauth/token***
+**`http://localhost:8080/oauth/token`**
 
 Now, add the Request Headers as follows −
 
