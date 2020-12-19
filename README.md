@@ -149,7 +149,8 @@ I have used `CodeachesBCryptPasswordEncoder.java` available [here](https://githu
 `src/main/resources/data.sql`
 
 ```
-INSERT INTO oauth_client_details (client_id, client_secret, web_server_redirect_uri, scope, access_token_validity, refresh_token_validity, resource_ids, authorized_grant_types, additional_information) VALUES ('mobile', '{bcrypt}$2a$10$gPhlXZfms0EpNHX0.HHptOhoFD1AoxSr/yUIdTqA8vtjeP4zi0DDu', 'http://localhost:8080/code', 'READ,WRITE', '3600', '10000', 'microservice', 'authorization_code,password,refresh_token,implicit', '{}');
+INSERT INTO oauth_client_details (client_id, client_secret, web_server_redirect_uri, scope, access_token_validity, refresh_token_validity, resource_ids, authorized_grant_types, additional_information) 
+VALUES ('mobile', '{bcrypt}$2a$10$gPhlXZfms0EpNHX0.HHptOhoFD1AoxSr/yUIdTqA8vtjeP4zi0DDu', 'http://localhost:8080/code', 'READ,WRITE', '3600', '10000', 'inventory,payment', 'authorization_code,password,refresh_token,implicit', '{}');
 
 /*client_id - client_secret*/
 /* mobile - pin* /
@@ -362,11 +363,34 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
 
 
-##  spring-boot-rest-data-jpa project run
+## How to run spring-boot-secure-rest application?
 
-1. `git clone https://github.com/ahasanhabibsumon/spring-boot-rest-data-jpa.git`
-2. `project import any IDE`
-3. `Go to application.properties and make sure databasename, username, password`
-4. `Run spring boot project`
-5. `open postman and import in postman REST-API-CRUD.postman_collection file `
+### Build Project
+
+Now, you can create an executable JAR file, and run the Spring Boot application by using the Maven shown below − For Maven, use the command as shown below −
+
+**Project import in sts4 IDE** `File > import > maven > Existing maven project > Root Directory-Browse > Select project form root folder > Finish`
+
+### Run project
+
+After “BUILD SUCCESSFUL”, you can find the JAR file under the build/libs directory. Now, run the JAR file by using the following command −
+
+```
+java –jar <JARFILE> `Run on sts IDE `click right button on the project >Run As >Spring Boot App
+```
+
+Server Running on: `8082` port
+
+**Test HTTP GET Request to resource service**
+
+```
+curl --request GET 'localhost:8082/employee/find' --header 'Authorization: Bearer 62e2545c-d865-4206-9e23-f64a34309787'
+```
+
+- Here `[localhost:8082/employee/find]` on the `http` means protocol, `localhost` for hostaddress 8082 are service port and `/employee/find` is method URL.
+- Here `[Authorization: Bearer 62e2545c-d865-4206-9e23-f64a34309787']` `Bearer` is toiken type and `62e2545c-d865-4206-9e23-f64a34309787` is auth service provided token
+
+### For getting All API Information
+
+On this repository we will see `secure-microservice-architecture.postman_collection.json` file, this file have to `import` on postman then we will ses all API information for testing api.
 
