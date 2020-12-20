@@ -294,7 +294,7 @@ Let’s get the access token for `admin` by passing his credentials as part of h
 
 Now hit the POST method URL via POSTMAN to get the OAUTH2 token.
 
-**`http://localhost:8080/oauth/token`**
+**`http://localhost:8082/oauth/token`**
 
 Now, add the Request Headers as follows −
 
@@ -367,6 +367,27 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 }
 ```
 
+## Test  Resource server
+
+
+
+**Test HTTP GET Request to resource service using CURL**
+
+```
+curl --request GET 'localhost:8082/employee/find' --header 'Authorization: Bearer 8b22d6b0-bd2c-44b3-9934-d20268ebe886'
+```
+
+**GET API test by postman**
+
+![Screenshot from 2020-12-07 09-19-06](https://user-images.githubusercontent.com/31319842/101305656-5bf05580-386d-11eb-8fc3-95a8c18f0b05.png)
+
+- Here `[localhost:8082/employee/find]` on the `http` means protocol, `localhost` for hostaddress 8082 are service port and `/employee/find` is method URL.
+- Here `[Authorization: Bearer 62e2545c-d865-4206-9e23-f64a34309787']` `Bearer` is toiken type and `62e2545c-d865-4206-9e23-f64a34309787` is auth service provided token
+
+### For getting All API Information
+
+On this repository we will see `spring-boot-secure-rest.postman_collection.json` file, this file have to `import` on postman then we will ses all API information for testing api.
+
 
 
 ## How to run spring-boot-secure-rest application?
@@ -386,23 +407,3 @@ java –jar <JARFILE> `Run on sts IDE `click right button on the project >Run As
 ```
 
 Server Running on: `8082` port
-
-**Test HTTP GET Request to resource service using CURL**
-
-```
-curl --request GET 'localhost:8082/employee/find' --header 'Authorization: Bearer 8b22d6b0-bd2c-44b3-9934-d20268ebe886'
-```
-
-
-
-**GET API test by postman**
-
-![Screenshot from 2020-12-07 09-19-06](https://user-images.githubusercontent.com/31319842/101305656-5bf05580-386d-11eb-8fc3-95a8c18f0b05.png)
-
-- Here `[localhost:8082/employee/find]` on the `http` means protocol, `localhost` for hostaddress 8082 are service port and `/employee/find` is method URL.
-- Here `[Authorization: Bearer 62e2545c-d865-4206-9e23-f64a34309787']` `Bearer` is toiken type and `62e2545c-d865-4206-9e23-f64a34309787` is auth service provided token
-
-### For getting All API Information
-
-On this repository we will see `spring-boot-secure-rest.postman_collection.json` file, this file have to `import` on postman then we will ses all API information for testing api.
-
