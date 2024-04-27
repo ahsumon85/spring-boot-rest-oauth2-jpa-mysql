@@ -52,5 +52,4 @@ public class EmployeeController {
 		BaseResponse response = employeeService.deleteEmployeeById(id);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
-
 }
