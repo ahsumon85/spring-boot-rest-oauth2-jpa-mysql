@@ -32,7 +32,7 @@ public class EmployeeController {
 	@GetMapping(value = "/find")
 	public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
 		List<EmployeeDTO> list = employeeService.findEmployeeList();
-		return new ResponseEntity<List<EmployeeDTO>>(list, HttpStatus.OK);
+		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/find/by-id")
