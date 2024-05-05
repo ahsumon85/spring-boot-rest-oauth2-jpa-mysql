@@ -39,6 +39,7 @@ public class EmployeeController {
 	public ResponseEntity<EmployeeDTO> getEmployeeById(@RequestParam Long id) {
 		EmployeeDTO list = employeeService.findByEmployeeId(id);
 		return new ResponseEntity<>(list, HttpStatus.OK);
+
 	}
 
 	@PostMapping(value = { "/add", "/update" })
